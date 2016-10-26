@@ -6,6 +6,8 @@ This is basically just a (partial) port of https://github.com/mr0re1/pynstagram.
 ## Usage
     open System.IO
     open System.Net
+    
+    open Hallward.Uploader
 
     [<EntryPoint>]
     let main argv = 

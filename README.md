@@ -20,7 +20,6 @@ This is basically just a (partial) port of https://github.com/mr0re1/pynstagram.
             let client = loginRes.Value.Value
             use image = new FileStream(@"C:\path\to\whatever.jpg", FileMode.Open)
             printf "(upload) "
-            let filename = Path.GetFileName path
             let! uploadRes = Session.upload client "whatever.jpg" image
             printf "%i %s\n" (int uploadRes.Code) uploadRes.Reason
             if uploadRes.Code <> HttpStatusCode.OK then return () else

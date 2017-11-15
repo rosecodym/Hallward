@@ -1,8 +1,10 @@
-﻿// Copyright © Cody Rose 2016
+﻿// Copyright © Cody Rose 2016-2017
 
 module Hallward.Uploader.Session
 
 open System
+open System.Collections.Generic
+open System.Dynamic
 open System.Net
 open System.Net.Http
 open System.Net.Http.Headers
@@ -134,7 +136,7 @@ let upload (client: Client) (filename: string) photoStream =
         match response.IsSuccessStatusCode with
         | true ->
             let! responseBody = response.Content.ReadAsStringAsync() |> Async.AwaitTask
-            let json = JsonConvert.DeserializeObject<System.Collections.Generic.Dictionary<string, string>>(responseBody)
+            let json = JsonConvert.DeserializeObject<ExpandoObject>(responseBody) :> IDictionary<_, _>
             return success response json.["upload_id"]
         | false ->
             return failure response
